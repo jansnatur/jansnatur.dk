@@ -93,19 +93,30 @@ function hookup_swap(node) {
 	function consider(n, i) {
 		activeTag(n, i == active);
 	}
-	function act(advance) {
+	function act(isclick, advance) {
 		cs = cards();
-		if (advance)
-			active = (active + 1) % cs.length;
+		function pause(video) {
+			video.pause();
+		}
+		if (advance) {
+			vids = cs[active].querySelectorAll("video.playing");
+			if (isclick) {
+				forEach(vids, pause);
+			}
+			if (isclick || vids.length == 0) {
+				active = (active + 1) % cs.length;
+			}
+		}
 		forEach(cs, consider);
 	}
 	function onTicked() {
-		act(node.querySelectorAll(":hover").length == 0);
+		act(false, node.querySelectorAll(":hover").length == 0);
 		clickedTag(node, false);
 	}
 	function next() {
-		act(true);
+		act(true, true);
 		clickedTag(node, true);
+		return false;
 	}
 	function onInit() {
 		act(false);
@@ -142,6 +153,20 @@ function ready(callback, context){
         if (document.readyState=='complete') cb();
     });
 }
+videoPlayingTag = classTag("playing", "notplaying");
+function videotagging(node) {
+	function playing() { 
+	    videoPlayingTag(node, true); 
+	}
+	function paused() {
+	}
+	function stopped() { 
+	    videoPlayingTag(node, false); 
+	}
+	node.onended = stopped;
+    node.onplaying = playing;
+    node.onpause = paused;
+};
 
 var X = {
 	regExpEscape: regExpEscape,
@@ -153,6 +178,7 @@ var X = {
 	hookup_swap: hookup_swap,
 	hookup_explain: hookup_explain,
 	transformWidth: transformWidth,
+	videotagging: videotagging,
 	ready: ready
 };
 return X;

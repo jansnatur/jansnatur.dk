@@ -26,7 +26,8 @@
 		<script>
 X.ready(function() {
 	X.forEach(document.getElementsByClassName("explain"), X.hookup_explain)
-	X.forEach(document.querySelectorAll(".swap"), X.hookup_swap);
+	X.forEach(document.querySelectorAll("video"), X.videotagging);
+	X.forEach(Array.from(document.querySelectorAll(".swap")), X.hookup_swap);
 	var iframersize = X.foldl(document.querySelectorAll("iframe"), function() {}, function(a, node) {
 		return function () {
 			a();
@@ -57,7 +58,7 @@ X.ready(function() {
 				<ul class="swap">
 					<li>
 						<figure>
-							<video autoplay controls poster="img/sortsol_flok_i_horisont.jpg">
+							<video controls poster="img/sortsol_flok_i_horisont.jpg">
 								<source src="./vid/sortsol_vandrefalk_360.mp4" type="video/mp4"/>
 								<source src="./vid/sortsol_vandrefalk_360.ogg" type="video/ogg"/>
 							</video>
