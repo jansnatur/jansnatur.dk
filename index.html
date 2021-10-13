@@ -32,7 +32,7 @@ X.ready(function() {
 	var iframersize = X.foldl(document.querySelectorAll("iframe"), function() {}, function(a, node) {
 		return function () {
 			a();
-			transformWidth(node);
+			X.transformWidth(node);
 		}
 	});
 	document.iframersize = iframersize;
