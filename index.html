@@ -24,9 +24,7 @@
 		<meta name="git-export" content="$Format:%H$"/>
 		<script  src="X.js" ></script>
 		<script>
-console.log("script", X);
 X.ready(function() {
-	console.log("scipt callback", X);
 	X.forEach(document.getElementsByClassName("explain"), X.hookup_explain)
 	X.forEach(document.querySelectorAll(".swap"), X.hookup_swap);
 	var iframersize = X.foldl(document.querySelectorAll("iframe"), function() {}, function(a, node) {
@@ -38,7 +36,6 @@ X.ready(function() {
 	document.iframersize = iframersize;
 	window.onresize = iframersize;
 	window.setInterval(X.maketick(), 5000);
-	console.log("scipt callback done", X);
 });
 		</script>
 		<title>Jans Naturture</title>
