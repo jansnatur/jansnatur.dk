@@ -10,7 +10,7 @@
     --active-opacity: 1;
     --active-visibilty: visible;
     --inactive-display: block;
-    --inactive-opacity: .5;
+    --inactive-opacity: .25;
     --inactive-visibilty: visible;
     --figure-inactive-scale: 1.05;
 }
@@ -135,52 +135,54 @@
 .swap > li {
 	display: none;
 	display: var(--inactive-display);
-	opacity: var(--inactive-opacity);
+
 	visibility: var(--inactive-visibilty);
-	transition-property: opacity, transform;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
-}
-.swap > li:first-of-type {
-	display: block;
-	display: var(--active-display);
-	opacity: var(--active-opacity);
-	visibility: var(--active-visibilty);
-	z-index: 1;
-}
-.swap > li.inactive {
-	display: none;
-	display: var(--inactive-display);
 	opacity: var(--inactive-opacity);
-	visibility: var(--inactive-visibilty);
-}
-.swap > li.active {
-	display: block;
-	display: var(--active-display);
-	opacity: var(--active-opacity);
-	visibility: var(--active-visibilty);
-	z-index: 1;
-}
-.swap > li.active:nth-child(n) figure {
-	transition-property: opacity, transform;
-	transition-duration: .25s;
-	transition-timing-function: ease-in-out;
+	transition-duration: .5s, .5s, 1s;
+	transition-property: opacity, transform, z-index;
+	z-index: 0;
     transform: rotate(0deg) scale(var(--figure-active-scale));
 }
-.swap li:nth-child(1) figure {
-    transform: rotate(0deg) scale(var(--figure-inactive-scale));
+@keyframes toback {
+	0% { transform: scale(1); }
+	50% { transform: scale(0); }
+	100% { transform: scale(var(--figure-inactive-scale)); }
 }
-.swap li.inactive:nth-child(1) figure {
+
+.swap > li:not(.inactive):first-of-type {
+	display: block;
+	display: var(--active-display);
+	opacity: var(--active-opacity);
+	visibility: var(--active-visibilty);
+	z-index: 1;
+}
+.swap > li.active:nth-child(n) {
+	display: block;
+	display: var(--active-display);
+	opacity: var(--active-opacity);
+	visibility: var(--active-visibilty);
+	z-index: 2;
+    transform: rotate(0deg) scale(var(--figure-active-scale));
+}
+.swap > li.inactive {
+	animation-name: toback;
+	animation-duration: .5s;
+	animation-timing-function: ease-in-out;
+}
+.swap > li.inactive:nth-child(0) {
+    transform: rotate(-10deg) scale(var(--figure-inactive-scale));
+}
+.swap li.inactive:nth-child(1) {
     transform: rotate(-2deg) scale(var(--figure-inactive-scale));
 }
-.swap li:nth-child(2) figure {
-    transform: rotate(2deg) scale(var(--figure-inactive-scale));
+.swap li:nth-child(2) {
+    transform: rotate(4deg) scale(var(--figure-inactive-scale));
 }
-.swap li:nth-child(3) figure {
+.swap li:nth-child(3) {
     transform: rotate(-4deg) scale(var(--figure-inactive-scale));
 }
-.swap li:nth-child(4) figure {
-    transform: rotate(4deg) scale(var(--figure-inactive-scale));
+.swap li:nth-child(4)  {
+    transform: rotate(6deg) scale(var(--figure-inactive-scale));
 }
 
 /***** Content of topic cards */
