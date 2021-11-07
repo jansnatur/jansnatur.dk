@@ -235,6 +235,9 @@ a:hover {
     text-decoration: underline;
 }
 
+div.top {
+	text-align: center;
+}
 
 .hardbreak
 {
