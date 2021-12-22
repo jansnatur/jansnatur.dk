@@ -227,12 +227,17 @@ h1 + p {
 	clear: both;
 }
 
+a:link {
+	color: inherit;
+	text-decoration-thickness: 0px;
+    text-decoration-line: underline;
+}
+
 a:link, a:visited {
-    text-decoration: none;
-    color: #341a0c;
+    text-decoration-style: dashed;
 }
 a:hover {
-    text-decoration: underline;
+    text-decoration-style: wavy;
 }
 
 div.top {
