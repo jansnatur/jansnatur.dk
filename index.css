@@ -235,7 +235,7 @@ a:link {
 
 a:link, a:visited {
 	color: inherit;
-    text-decoration-style: dashed;
+	font-style: italic;
 }
 a:hover {
 	color: inherit;
